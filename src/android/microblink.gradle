@@ -1,0 +1,9 @@
+repositories {
+	maven { url 'http://maven.microblink.com' }
+}
+
+dependencies {
+    implementation('com.microblink:blinkid:5.4.0@aar') {
+        transitive = true
+    }
+}

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="com.fidelidade.blinkid"
+      version="0.0.3">
+    <name>Blink Id Plugin</name>
+    <description>Plugin Read Card ID and to Scan Documents</description>
+    <license>MIT License</license>
+    <keywords>cordova,outsystems, blinkid, microblink, cardID</keywords>
+    <repo></repo>
+    <issue></issue>
+
+    <js-module src="www/BlinkId.js" name="BlinkId">
+        <clobbers target="cordova.plugins.blinkId" />
+        <clobbers target="plugin.blinkId" />
+    </js-module>
+
+    <!-- ios -->
+    <platform name="ios">
+        <config-file target="config.xml" parent="/*">
+            <feature name="BlinkIdPlugin">
+                <param name="ios-package" value="BlinkIdPlugin" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+        <header-file src="src/ios/BlinkIdPlugin.h" />
+        <source-file src="src/ios/BlinkIdPlugin.m" />
+        <header-file src="src/ios/PassportRecognizerDelegate.h"/>
+        <source-file src="src/ios/PassportRecognizerDelegate.m"/>
+        <header-file src="src/ios/PluginCore.h"/>
+        <source-file src="src/ios/PluginCore.m"/>
+        
+        <!-- MicroBlink frameworks -->
+        <resource-file src="src/ios/libs/Microblink.bundle" />
+        <framework src="src/ios/libs/MicroBlinkFramework/Microblink.framework" custom="true" embed="true" target-dir="." />
+
+        <!-- System frameworks -->
+        <framework src="libc++.tbd" />
+        <framework src="libiconv.tbd" />
+        <framework src="libz.tbd" />
+        <framework src="AVFoundation.framework" />
+        <framework src="AudioToolbox.framework" />
+        <framework src="CoreMedia.framework" />
+        <framework src="OpenGLES.framework" />
+        <framework src="QuartzCore.framework" /> 
+        <framework src="CoreVideo.framework" />
+        <framework src="Accelerate.framework" /> 
+      
+        <preference name="CAMERA_USAGE_DESCRIPTION" default=" " />
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>Read ID Cards</string>
+        </config-file>
+
+        <hook type="before_plugin_install" src="hooks/handle_microblink_framework.js" />
+
+    </platform>
+    
+    <!-- Android -->
+    <platform name="android">
+        
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="BlinkIdPlugin">
+                <param name="android-package" value="com.fidelidade.blinkid.BlinkIdPlugin"/>
+            </feature>
+        </config-file>
+        
+        <source-file src="src/android/BlinkIdPlugin.java" target-dir="src/com/fidelidade/blinkid" />
+		<framework src="src/android/microblink.gradle" custom="true" type="gradleReference" />        
+    </platform>
+    
+</plugin>
