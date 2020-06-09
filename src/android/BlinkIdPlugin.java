@@ -4,13 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Matrix;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.util.Base64;
 import android.widget.Toast;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 
-import com.diogolopes.outsystemscloud.docscan.R;
 import com.microblink.MicroblinkSDK;
 import com.microblink.entities.recognizers.Recognizer;
 import com.microblink.entities.recognizers.RecognizerBundle;
@@ -21,7 +20,6 @@ import com.microblink.entities.recognizers.blinkid.imageoptions.FullDocumentImag
 import com.microblink.entities.recognizers.blinkid.imageresult.CombinedFullDocumentImageResult;
 import com.microblink.entities.recognizers.blinkid.imageresult.FaceImageResult;
 import com.microblink.entities.recognizers.blinkid.imageresult.FullDocumentImageResult;
-import com.microblink.entities.recognizers.blinkid.mrtd.MrtdDocumentType;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrtdRecognizer;
 import com.microblink.entities.recognizers.blinkid.mrtd.MrzResult;
 import com.microblink.entities.recognizers.blinkid.passport.PassportRecognizer;
@@ -33,7 +31,6 @@ import com.microblink.uisettings.ActivityRunner;
 import com.microblink.uisettings.BlinkIdUISettings;
 import com.microblink.uisettings.DocumentUISettings;
 import com.microblink.uisettings.UISettings;
-import com.microblink.uisettings.options.BeepSoundUIOptions;
 import com.microblink.uisettings.options.OcrResultDisplayMode;
 import com.microblink.uisettings.options.OcrResultDisplayUIOptions;
 import com.microblink.util.Log;
