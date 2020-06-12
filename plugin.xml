@@ -64,6 +64,8 @@
             </feature>
         </config-file>
         
+        <dependency id="cordova-androidx-build" url="https://github.com/wf9a5m75/cordova-androidx-build.git" />
+
         <source-file src="src/android/BlinkIdPlugin.java" target-dir="src/com/fidelidade/blinkid" />
 		<framework src="src/android/microblink.gradle" custom="true" type="gradleReference" />        
     </platform>
