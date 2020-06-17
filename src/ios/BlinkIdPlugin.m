@@ -37,12 +37,12 @@
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_ERROR messageAsString:@"A license key must be provided to use this plugin"];
     }
     
-    if (!command.arguments[0][@"ios"]) {
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_JSON_EXCEPTION messageAsString:@"No iOS license key found in parameter"];
+    if (!command.arguments[0]) {
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_JSON_EXCEPTION messageAsString:@"No license key found in parameter"];
     }
     
     if (pluginResult == nil) {
-        licenseKey = command.arguments[0][@"ios"];
+        licenseKey = command.arguments[0];
         [[MBMicroblinkSDK sharedInstance] setLicenseKey:licenseKey];
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK];
         self.sdkInitialized = YES;
