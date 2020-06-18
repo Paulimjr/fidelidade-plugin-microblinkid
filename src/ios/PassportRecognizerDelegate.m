@@ -79,7 +79,7 @@
     self.faceImageBase64, @"facePhoto",
     nil];
     
-    CDVPluginResult __block *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsDictionary:passportData];
+    CDVPluginResult __block *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@", passportData]];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.command.callbackId];
@@ -92,4 +92,3 @@
 }
 
 @end
-
