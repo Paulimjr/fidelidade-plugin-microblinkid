@@ -160,7 +160,11 @@
                                                                                 self.faceImageBase64, @"facePhoto",
                                                                                 nil];
         
-        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@", IDCardData]];
+        NSError * err;
+        NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:IDCardData options:0 error:&err];
+        NSString * IDCardDataString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
+
+        pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:IDCardDataString];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             [self.viewController dismissViewControllerAnimated:YES completion:nil];

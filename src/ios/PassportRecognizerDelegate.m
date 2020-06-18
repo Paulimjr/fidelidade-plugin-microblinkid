@@ -78,8 +78,12 @@
     self.fullDocumentImageBase64, @"frontPhoto",
     self.faceImageBase64, @"facePhoto",
     nil];
+
+    NSError * err;
+    NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:passportData options:0 error:&err];
+    NSString * passportDataString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
     
-    CDVPluginResult __block *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:[NSString stringWithFormat:@"%@", passportData]];
+    CDVPluginResult __block *pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:passportDataString];
     
     dispatch_async(dispatch_get_main_queue(), ^{
         [self.commandDelegate sendPluginResult:pluginResult callbackId:self.command.callbackId];
