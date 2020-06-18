@@ -128,7 +128,6 @@
         [blinkIdOverlayViewController.recognizerRunnerViewController pauseScanning];
         
         MBMrzResult *results = self.blinkIDCombinedRecognizer.result.mrzResult;
-        results = self.passportRecognizer.result.mrzResult;
         
 //        NSLog(@"Back: %@", self.blinkIDCombinedRecognizer.result.fullDocumentBackImage.image);
 //        NSLog(@"Front: %@", self.blinkIDCombinedRecognizer.result.fullDocumentFrontImage.image);
@@ -142,26 +141,44 @@
             backImageBase64 = [UIImagePNGRepresentation(self.blinkIDCombinedRecognizer.result.fullDocumentBackImage.image) base64EncodedStringWithOptions:NSDataBase64Encoding64CharacterLineLength];
         }
         
-        NSDictionary *IDCardData = [NSDictionary dictionaryWithObjectsAndKeys:  @(results.isParsed), @"isParsed",
-                                                                                results.issuer, @"issuer",
-                                                                                results.documentNumber, @"documentNumber",
-                                                                                results.documentCode, @"documentCode",
-                                                                                [self MBDateResultToOutSystems:results.dateOfExpiry], @"dateOfExpiry",
-                                                                                results.primaryID, @"primaryId",
-                                                                                results.secondaryID, @"secondaryId",
-                                                                                [self MBDateResultToOutSystems:results.dateOfBirth], @"dataOfBirth",
-                                                                                results.nationality, @"nationality",
-                                                                                results.gender, @"sex",
-                                                                                results.opt1, @"opt1",
-                                                                                results.opt2, @"opt2",
-                                                                                results.mrzText, @"mrzText",
-                                                                                frontImageBase64, @"frontPhoto",
-                                                                                backImageBase64, @"backPhoto",
-                                                                                self.faceImageBase64, @"facePhoto",
-                                                                                nil];
+//        NSMutableDictionary *IDCardData = [NSMutableDictionary dictionaryWithObjectsAndKeys:  @(results.isParsed), @"isParsed",
+//                                                                                results.issuer, @"issuer",
+//                                                                                results.documentNumber, @"documentNumber",
+//                                                                                results.documentCode, @"documentCode",
+//                                                                                [self MBDateResultToOutSystems:results.dateOfExpiry], @"dateOfExpiry",
+//                                                                                results.primaryID, @"primaryId",
+//                                                                                results.secondaryID, @"secondaryId",
+//                                                                                [self MBDateResultToOutSystems:results.dateOfBirth], @"dateOfBirth",
+//                                                                                results.nationality, @"nationality",
+//                                                                                results.gender, @"sex",
+//                                                                                results.opt1, @"opt1",
+//                                                                                results.opt2, @"opt2",
+//                                                                                results.mrzText, @"mrzText",
+//                                                                                frontImageBase64, @"frontPhoto",
+//                                                                                backImageBase64, @"backPhoto",
+//                                                                                self.faceImageBase64, @"facePhoto",
+//                                                                                nil];
+        
+        NSMutableDictionary *IDCardData = [NSMutableDictionary new];
+        IDCardData[@"isParsed"] = @(results.isParsed);
+        IDCardData[@"issuer"] = results.issuer;
+        IDCardData[@"documentNumber"] = results.documentNumber;
+        IDCardData[@"documentCode"] = results.documentCode;
+        IDCardData[@"dateOfExpiry"] = results.dateOfExpiry.originalDateString;
+        IDCardData[@"primaryId"] = results.primaryID;
+        IDCardData[@"secondaryId"] = results.secondaryID;
+        IDCardData[@"dateOfBirth"] = results.dateOfBirth.originalDateString;
+        IDCardData[@"nationality"] = results.nationality;
+        IDCardData[@"sex"] = results.gender;
+        IDCardData[@"opt1"] = results.opt1;
+        IDCardData[@"opt2"] = results.opt2;
+        IDCardData[@"mrzText"] = results.mrzText;
+        IDCardData[@"frontPhoto"] = frontImageBase64;
+        IDCardData[@"backPhoto"] = backImageBase64;
+        IDCardData[@"facePhoto"] = frontImageBase64;
         
         NSError * err;
-        NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:IDCardData options:0 error:&err];
+        NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:IDCardData options:0	 error:&err];
         NSString * IDCardDataString = [[NSString alloc] initWithData:jsonData   encoding:NSUTF8StringEncoding];
 
         pluginResult = [CDVPluginResult resultWithStatus:CDVCommandStatus_OK messageAsString:IDCardDataString];
