@@ -175,7 +175,7 @@
         IDCardData[@"mrzText"] = results.mrzText;
         IDCardData[@"frontPhoto"] = frontImageBase64;
         IDCardData[@"backPhoto"] = backImageBase64;
-        IDCardData[@"facePhoto"] = frontImageBase64;
+        IDCardData[@"facePhoto"] = self.faceImageBase64;
         
         NSError * err;
         NSData * jsonData = [NSJSONSerialization  dataWithJSONObject:IDCardData options:0	 error:&err];
