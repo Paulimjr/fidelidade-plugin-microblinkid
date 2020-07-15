@@ -1,0 +1,26 @@
+{
+  "name": "fidelidade-plugin-microblinkid",
+  "version": "1.0.0",
+  "description": "BlinkID SDK is a delightful component for quick and easy scanning of ID cards, passports and drivers licenses.  The SDK is powered with [MicroBlink's](http://www.microblink.com) industry-proven and world leading OCR and barcode scanning technology, and offers:",
+  "main": "index.js",
+  "dependencies": {
+    "adm-zip": "^0.4.13"
+  },
+  "devDependencies": {
+    "adm-zip": "0.4.13"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/premedios/fidelidade-plugin-microblinkid.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/premedios/fidelidade-plugin-microblinkid/issues"
+  },
+  "homepage": "https://github.com/premedios/fidelidade-plugin-microblinkid#readme"
+}
